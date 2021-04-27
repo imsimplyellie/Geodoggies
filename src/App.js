@@ -11,8 +11,9 @@ export default class FetchDog extends React.Component {
     const url = 'https://dog.ceo/api/breeds/list/all'
     const response = await fetch(url)
     const data = await response.json()
-    this.setState({ doggies: data.message, loading: false })
-  }
+    var result = Object.keys(data.message)
+    this.setState({ doggies: result, loading: false })
+   }
 
   render() {
     if (this.state.loading) {
@@ -25,7 +26,11 @@ export default class FetchDog extends React.Component {
 
     return (
       <div>
-        {JSON.stringify(this.state.doggies)}
+        {this.state.doggies.map((breed) => (
+          <div>
+            <div>{breed}</div>
+          </div>
+        ))}
       </div>
     )
   }
